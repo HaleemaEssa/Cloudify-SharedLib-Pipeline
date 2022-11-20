@@ -1,4 +1,4 @@
-@Library("shared-library") _
+library 'shared-library'
 pipeline {
   environment {
         DOCKERHUB_CREDENTIALS=credentials('haleema-dockerhub')
