@@ -1,0 +1,38 @@
+@Library("shared-library") _
+pipeline {
+  environment {
+        DOCKERHUB_CREDENTIALS=credentials('haleema-dockerhub')
+    }
+  agent none
+  stages {
+    stage('Login to Dockerhub') {
+      agent {label 'local'}
+            steps {
+                login()
+            }
+        } 
+    stage('cfy-Upload Blueprint') {
+      agent {label 'local'}
+            steps {
+              git branch: 'main', url: 'https://github.com/HaleemaEssa/displayblueprintresuslt.git'
+              upload_blueprint()
+              sleep(time: 1, unit: "SECONDS")
+            }
+        }
+    stage('cfy-Create Deployment') {
+      agent {label 'local'}
+            steps {
+              git branch: 'main', url: 'https://github.com/HaleemaEssa/displayblueprintresuslt.git'
+              create_deployment()
+	      sleep(time: 1, unit: "SECONDS")
+
+            }
+        }
+    stage('cfy-Start Execution') {
+      agent {label 'local'}
+            steps {
+              git branch: 'main', url: 'https://github.com/HaleemaEssa/displayblueprintresuslt.git'
+              start_execution()
+            }
+        }
+        }
