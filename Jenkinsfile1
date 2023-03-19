@@ -1,6 +1,6 @@
 @Library("shared-library") _
 pipeline {
-  "$ environment" {
+  environment {
         DOCKERHUB_CREDENTIALS=credentials('haleema-dockerhub')
     }
   agent none
@@ -11,7 +11,7 @@ pipeline {
                 login()
             }
         } 
-    stage('cfy-Upload Blueprint') {
+    /*stage('cfy-Upload Blueprint') {
       agent {label 'local'}
             steps {
               git branch: 'main', url: 'https://github.com/HaleemaEssa/displayblueprintresuslt.git'
@@ -34,6 +34,6 @@ pipeline {
               git branch: 'main', url: 'https://github.com/HaleemaEssa/displayblueprintresuslt.git'
               start_execution()
             }
-        }
+        }*/
         }
 	}
